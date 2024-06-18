@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <script th:src="@{/static/js/axios.js}"></script>
+    <script th:src="@{/static/js/vue3.4.21.js}"></script>
+</head>
+<body>
+<h1>Index页面</h1>
+<hr>
+<h2>视图控制器运行成功！！！</h2>
+<br>
+<br>
+<hr>
+<h1>以下为发送AJAX请求查找ID为1的用户信息</h1>
+<div id="app">
+    <button @click="getUser">点我获得ID为1的用户信息</button>
+    <h1>{{message}}</h1>
+</div>
+</body>
+<script th:inline="javascript">
+    Vue.createApp({
+
+        data(){
+            return{
+                message:''
+            }
+        },
+        methods:{
+            async getUser(){
+                let response = await axios.get([[@{/}]]+'1')
+                this.message=response.data
+            }
+        }
+    }).mount("#app")
+</script>
+</html>
